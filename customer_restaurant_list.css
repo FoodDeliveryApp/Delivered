@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+html {
+  background-image: url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/3667915/910/607/m2/fpnw/wm1/nmzbxenrvudgiuql2gecymrkchyewfixbljlnhzfmcee5aog6m0o0146ltenmjts-.jpg?1512111126&s=09e589f33be51c2630b58b91981bff77');
+}
+
+.restaurant-card {
+  margin: 40px; /*margin is for space outside, padding is for space inside*/
+  width: 600px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+}
+
+/* See if can keep proportions of original pic in square */
+.restaurant-card img {
+  display: block;
+  max-width: 200px;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+.restaurant-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 35px;
+  padding-top: 25px;
+}
+
+.restaurant-info p {
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
+}
+
+.restaurant-info button {
+  margin: 20px;
+  height: 35px;
+  width: 88px;
+  border: transparent;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #00B4CC;
+  cursor: pointer;
+  position: absolute;
+  right: 470px;
+}
+
+.restaurant-info button:hover {
+  background-color: #dea792;
+}
+
+/* SEARCH BAR from https://www.w3schools.com/howto/howto_css_search_button.asp */
+.search-bar {
+  margin: 40px;
+  display: flex;
+  flex-direction: row;
+  width: 600px;
+  height:20px;
+  font-family: 'Lato', sans-serif;
+}
+
+.search-bar input[type=text] {
+  padding: 10px;
+  font-size: 14px;
+  width: 90%;
+  height: 100%
+  /* -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15); */
+}
+
+.search-bar button {
+  float: right;
+  width: 10%;
+  height: 43px;
+  /* padding: 20.7px; */
+  background: #00B4CC;
+  color: white;
+  font-size: 14px;
+  border: transparent; /* Prevent double borders */
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #dea792;
+}
+
+/* Clear floats */
+.search-bar button::after {
+  content: "";
+  clear: both;
+  display: table;
+}

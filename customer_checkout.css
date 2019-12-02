@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: center;
+	background-image: url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/3667915/910/607/m2/fpnw/wm1/nmzbxenrvudgiuql2gecymrkchyewfixbljlnhzfmcee5aog6m0o0146ltenmjts-.jpg?1512111126&s=09e589f33be51c2630b58b91981bff77');
+	font-family: "Lato", sans-serif;
+}
+
+#main {
+	position: relative;
+	width: 550px;
+	height: 330px;
+	left: 30px;
+	background-color: white;
+}
+
+#right {
+	width: 90%;
+	height: 100%;
+	top: 0;
+	left: 40%;
+
+	display: flex;
+	flex-flow: column nowrap;
+
+	padding-left: 20px;
+}
+
+#right form {
+	display: flex;
+	flex-flow: column nowrap;
+
+	width: 100%;
+}
+
+#right form input,
+#right form select {
+	-moz-appearance:none; /* Firefox */
+	-webkit-appearance:none; /* Safari and Chrome */
+	appearance:none;
+	border: none;
+	border-bottom: 1.5px solid #ccc;
+
+	padding: 5px;
+	margin-top: 2.5px;
+	position: relative;
+}
+
+#right form .form-field {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+
+	margin-bottom: 12.5px;
+}
+
+#right form #date-val {
+	display: flex;
+	justify-content: space-between;
+}
+
+#right form #date-val select {
+	width: 45%;
+}
+
+#right form button[type="submit"] {
+	background: #d18b6f;
+	padding: 5px;
+	border: none;
+	/* border-radius: 50px; */
+	color: white;
+	font-weight: 400;
+	font-size: 12pt;
+	margin-top: 10px;
+  height: 43px;
+}
+
+#right form button[type="submit"]:hover {
+	background: transparent;
+	box-shadow: 0 0 0 3px $primary;
+	color: $primary;
+}
