@@ -1,0 +1,96 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="../css/loginstyle.css">
+  <script type="text/javascript" src="../js/loginstyle.js"></script>
+  <title>Sign in or Sign Up</title>
+</head>
+
+<body>
+  <div class="cotn_principal">
+    <div class="cont_centrar">
+
+      <div class="cont_login">
+        <div class="cont_info_log_sign_up">
+          <div class="col_md_login">
+            <div class="cont_ba_opcitiy">
+
+              <h2>LOGIN</h2>
+              <p>Welcome back to Delivered!</p>
+              <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+            </div>
+          </div>
+          <div class="col_md_sign_up">
+            <div class="cont_ba_opcitiy">
+              <h2>SIGN UP</h2>
+
+
+              <p>Sign up and get all the perks of being a Customer of your favorite restaurants</p>
+
+              <button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="cont_back_info">
+          <div class="cont_img_back_grey">
+            <img src="..//img/food.jpg" alt="" />
+          </div>
+
+        </div>
+        <div class="cont_forms">
+          <div class="cont_img_back_">
+            <img src="..//img/food.jpg" alt="" />
+          </div>
+          <div class="cont_form_login">
+            <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+            <h2>LOGIN</h2>
+            <input type="text" placeholder="Email" />
+            <input type="password" placeholder="Password" />
+            <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+          </div>
+
+          <div class="cont_form_sign_up">
+            <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+            <h2>SIGN UP</h2>
+            <input type="text" placeholder="Email" id="cust_email" />
+            <input type="text" placeholder="Username" id="cust_username" />
+            <input type="text" placeholder="First Name" id="cust_first" />
+            <input type="text" placeholder="Last Name" id="cust_last" />
+            <input type="text" placeholder="Address" id="cust_address" />
+            <input type="password" placeholder="Password" id="cust_password" />
+            <input type="password" placeholder="Confirm Password" />
+            <button class="btn_sign_up" id="btnSignup">SIGN UP</button>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    const btnSignup = document.getElementById("btnSignup")
+    btnSignup.addEventListener("click", async e => {
+      const jsonRequest = {}
+      jsonRequest.fname = document.getElementById("cust_first").value;
+      jsonRequest.lname = document.getElementById("cust_last").value;
+      jsonRequest.em = document.getElementById("cust_email").value;
+      jsonRequest.uname = document.getElementById("cust_username").value;
+      jsonRequest.addr = document.getElementById("cust_address").value;
+      jsonRequest.passw = document.getElementById("cust_password").value;
+      const result = await fetch("http://localhost:8080/signup", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(jsonRequest) })
+      console.log(JSON.stringify(jsonRequest));
+
+      const success = await result.json();
+      if (confirm("Account was successfuly created. Please login! ")) {
+        cambiar_login();
+        ocultar_login_sign_up();
+      }
+    })
+
+  </script>
+</body>
+
+</html>
