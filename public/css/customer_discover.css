@@ -1,0 +1,60 @@
+html,body {
+  margin: 0;
+  padding: 0;
+  background: url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/3667915/910/607/m2/fpnw/wm1/nmzbxenrvudgiuql2gecymrkchyewfixbljlnhzfmcee5aog6m0o0146ltenmjts-.jpg?1512111126&s=09e589f33be51c2630b58b91981bff77');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h2 {
+  font-family: arial;
+  padding: 20px;
+  text-align: center;
+  background: white;
+}
+
+.header {
+  padding: 5px;
+  padding-left: 40px;
+  /* Alternate color: #f7b733 */
+  color: black;
+  font-size: 15px;
+  font-family: arial;
+  background: #ffffff
+}
+
+.trendy-restaurant-card {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center; /* align-items centers horizontally */
+  background: white;
+  font-family: arial;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trendy-restaurant-card img {
+  height: 500px;
+  width: 500px;
+}
+
+.trendy-restaurant-card h3 {
+  margin: 10px;
+  margin-bottom: 0px;
+}
+
+.food-heaven {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* justify content centers horizontally */
+}
+
+.food-heaven-col img {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  margin: 5px;
+  vertical-align: baseline;
+}
