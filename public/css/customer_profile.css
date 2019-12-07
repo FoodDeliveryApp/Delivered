@@ -1,0 +1,80 @@
+html,body {
+  margin: 0;
+  padding: 0;
+  background: url('https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/3667915/910/607/m2/fpnw/wm1/nmzbxenrvudgiuql2gecymrkchyewfixbljlnhzfmcee5aog6m0o0146ltenmjts-.jpg?1512111126&s=09e589f33be51c2630b58b91981bff77');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h2 {
+  font-family: arial;
+  padding: 20px;
+  text-align: center;
+  background: white;
+}
+
+.header {
+  padding: 5px;
+  padding-left: 40px;
+  /* Alternate color: #f7b733 */
+  color: black;
+  font-size: 15px;
+  font-family: arial;
+  background: #ffffff
+}
+
+.customer-prof-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.customer-prof-card h1 {
+  font-family: arial;
+  padding: 5px;
+  background: black;
+  color: white;
+  margin: 0px;
+}
+
+.customer-prof-card h4 {
+  font-family: arial;
+  padding: 5px;
+  background: black;
+  color: white;
+}
+
+
+.customer-prof-card img {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  margin: 5px;
+}
+
+.customer-prof-card button {
+  width: 200px;
+  margin: 5px;
+  height: 35px;
+  border: transparent;
+  font-size: 14px;
+  color: #ffffff;
+  background-color: #000000;
+  cursor: pointer;
+}
+
+.food-heaven {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* justify content centers horizontally */
+}
+
+.food-heaven-col img {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  margin: 5px;
+  vertical-align: baseline;
+}
