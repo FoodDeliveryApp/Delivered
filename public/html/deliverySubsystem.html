@@ -12,15 +12,13 @@
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRFsw5qrit2q7QqW3Tw5GFHsBTPaiWzKI "></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/bidding_tabs.css">
+    <link rel="stylesheet" href="../css/bidding_tabs.css">
 
-    <script type="text/javascript" src="js/delivery_js/vertical_tabs/bidding.js"></script>
-    <script type="text/javascript" src="js/delivery_js/vertical_tabs/map.js"></script>
-    <script type="text/javascript" src="js/delivery_js/vertical_tabs/tabs.js"></script>
-    <script type="text/javascript" src="js/delivery_js/classes/order.js"></script>
-    <script type="text/javascript" src="js/delivery_js/classes/user.js"></script>
-    <script type="text/javascript" src="js/delivery_js/classes/bid.js"></script>
-    <script type="text/javascript" src="js/delivery_js/initData.js"></script>
+    <script type="text/javascript" src="../js/delivery_js/vertical_tabs/bidding.js"></script>
+    <script type="text/javascript" src="../js/delivery_js/vertical_tabs/map.js"></script>
+    <script type="text/javascript" src="../js/delivery_js/vertical_tabs/tabs.js"></script>
+    <script type="text/javascript" src="../js/classes.js"></script>
+    <script type="text/javascript" src="../js/delivery_js/initData.js"></script>
 
 </head>
 
@@ -28,18 +26,18 @@
 
     <!-- background and header -->
     <div class="container">
-        <img id="bg" src="delivery_img/bg_1.jpg" />
+        <img id="bg" src="../img/bg_1.jpg" />
         <div class="center">
             <h1 style="font-size: 2.5rem">Delivery System</h1>
         </div>
     </div>
 
-    <!-- vertical tab-->
+    <!-- vertical tabs-->
     <div class="vertical_tab">
         <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'CurrentOrder')" id="defaultOpen">Current
+            <button class="tablinks" onclick="openTab(event, 'CurrentOrder')">Current
                 order</button>
-            <button class="tablinks" onclick="openTab(event, 'BidForOrders')">Bid for orders</button>
+            <button class="tablinks" onclick="openTab(event, 'BidForOrders')" id="defaultOpen">Bid for orders</button>
             <button class="tablinks" onclick="openTab(event, 'MyAccount')">My account</button>
 
         </div>
@@ -49,11 +47,11 @@
             <table class="tbl-entry">
                 <tr>
                     <td>Starting Point</td>
-                    <td><input type="text" id="txtStartingPoint" class="input-entry" /></td>
+                    <td><input type="text" id="txtStartingPoint" class="input-entry" id="start_point" /></td>
                 </tr>
                 <tr>
                     <td>Destination Point</td>
-                    <td><input type="text" id="txtDestinationPoint" class="input-entry" /></td>
+                    <td><input type="text" id="txtDestinationPoint" class="input-entry" id="end_point" /></td>
                 </tr>
                 <tr>
                     <td></td>
@@ -80,26 +78,48 @@
                 <center>Available for bidding orders</center>
             </h1>
             <script>
-                createInitData();
+                // fillup table with orders available for delivery
+                const biddingTab = document.getElementById("defaultOpen")
+                biddingTab.addEventListener("click", async e => {
+
+                    const biddingTableOrders = await fetch("http://localhost:8080/getOrdersForDelivery", { method: "GET" });
+                    const orders = await biddingTableOrders.json();
+
+                    let orderData = [];
+                    for (let i = 0; i < orders.length; i++) {
+                        let order = new Order(orders[i].address, orders[i].created_on, orders[i].rating);
+                        orderData.push(order);
+                    }
+                    window.onload = () => {
+                        loadTableData(orderData);
+                    };
+
+                    console.log(orders);
+                })
+
+
+
+                //createInitData();
                 //update winners
-                let bidding_winners = new Map(); // array of pairs {order, winning bid}
+                /*               let bidding_winners = new Map(); // array of pairs {order, winning bid}
 
-                let sortDirection = false;
-                let orderData = ordersToBidFor;
+                               let sortDirection = false;
+                               let orderData = ordersToBidFor;
 
-                window.onload = () => {
-                    loadTableData(orderData);
-                };
+                               window.onload = () => {
+                                   loadTableData(orderData);
+                               };
+                */
             </script>
 
             <table class="ordersTable">
                 <thead>
                     <tr>
-                        <th>Customer<br>rating</th>
+                        <th onclick="sortColumn('price', Number)"><a class="sort-by">Customer<br>rating</th>
                         <th>Location</th>
-                        <th onclick="sortColumn('price', Number)"><a class="sort-by">Price</a></th>
+                        <!--<th onclick="sortColumn('price', Number)"><a class="sort-by">Price</a></th>-->
                         <th>Winning<br>bid</th>
-                        <th> Time<br>remaining</th>
+                        <th> Placement<br>Time</th>
                         <th>My bid</th>
                         <th>Increase<br>bid</th>
                     </tr>
@@ -130,11 +150,11 @@
                     <center><button id="goToMap" onclick="openTab(event, 'CurrentOrder')">Take me to my route</button>
                     </center>
                     <script>
-                        var dataOrder = '';
-                        var winning_order = orderData[0];
-                        dataOrder += `<a><center><br>Deliver order#</a> ${winning_order.order_id} <a>to</a><br> ${winning_order.customer} <a>at</a><br>
-                        ${winning_order.location}</a></center>`
-                        modalContent.innerHTML = dataOrder;
+                        /*     var dataOrder = '';
+                             //     var winning_order = orderData[0];
+                             dataOrder += `<a><center><br>Deliver order#</a> ${winning_order.order_id} <a>to</a><br> ${winning_order.customer} <a>at</a><br>
+                             ${winning_order.location}</a></center>`
+                             modalContent.innerHTML = dataOrder;*/
                     </script>
                 </div>
             </div>
