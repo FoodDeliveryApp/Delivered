@@ -71,14 +71,17 @@ app.post("/signin", async (req, res) => {
     let result = {}
     try {
         const reqJson = req.body;
-        if (await confirmUser(reqJson.em, reqJson.passw)) {
-            res.send("true");
-            console.log("yayyy");
+        if (await confirmUser(reqJson.email, reqJson.passw, reqJson.rest)) {
+            // console.log("yayyy");
+            res.redirect('/deliverySubs');
+            //res.json({ "message": "success" });
         } else {
+            //res.json({ "message": "fail" });
+
             console.log("whoo")
-            res.send("false");
             result.success = false;
         }
+        res.end();
         result.success = true;
     }
     catch (e) {
@@ -177,13 +180,14 @@ async function connect() {
 }
 
 
-async function confirmUser(email, password) {
+async function confirmUser(email, password, restaurant) {
     try {
 
         let user_password = await client.query("select password from users where email=$1", [email]);
+        let is_confirmed = await client.query("select is_confirmed from vip_association where (user_id=(select user_id from users where email = $1) and (restaurant_id = (select restaurant_id from restaurants where restaurant_name=$2)))", [email, restaurant]);
         user_password = user_password.rows[0].password;
-
-        if (user_password == password) {
+        is_confirmed = is_confirmed.rows[0].is_confirmed;
+        if (user_password == password && is_confirmed) {
             return true;
         } else {
             return false;
@@ -194,7 +198,6 @@ async function confirmUser(email, password) {
     }
 
 }
-
 async function insertCustomer(first_name, last_name, password, email, address) {
     try {
         await client.query("with ins as (insert into users(user_type,first_name,last_name ,password,email, created_on) values(0, $1,$2, $3, $4, current_timestamp) returning user_id as user_id) insert into customers(user_id, rating, address) values ((select user_id from ins), 0, $5)", [first_name, last_name, password, email, address]);
