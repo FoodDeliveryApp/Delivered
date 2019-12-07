@@ -1,4 +1,4 @@
-
+const { Client } = require('pg')
 const express = require('express')
 const path = require('path')
 const app = express()
@@ -8,7 +8,6 @@ app.use(express.json())
 app.use(bodyParser.json());
 app.use(express.static('public'))
 
-const { Client } = require('pg')
 const client = new Client({
     user: "postgres",
     password: "PowerMax300",
@@ -17,10 +16,6 @@ const client = new Client({
     database: "restaurant"
 })
 
-start()
-async function start() {
-    await connect();
-}
 
 app.get('/', (request, response) => {
     response.sendFile(path.resolve(__dirname, 'index.html'))
@@ -42,6 +37,18 @@ app.get('/salespersonLogin', (request, response) => {
     response.sendFile(path.resolve(__dirname, 'public/html/salespersonLogin.html'))
 })
 
+app.get('/deliverySubs', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public/html/deliverySubsystem.html'))
+})
+
+// get orders available for delivery
+app.get("/getOrdersForDelivery", async (req, res) => {
+
+    const rows = await getOrdersForBidding();
+    res.setHeader("content-type", "application/json")
+    res.send(JSON.stringify(rows))
+})
+
 // customer signup
 app.post("/signup", async (req, res) => {
     let result = {}
@@ -57,6 +64,27 @@ app.post("/signup", async (req, res) => {
         res.setHeader("content-type", "application/json")
         res.send(JSON.stringify(result))
     }
+})
+
+// customer signin
+app.post("/signin", async (req, res) => {
+    let result = {}
+    try {
+        const reqJson = req.body;
+        if (await confirmUser(reqJson.em, reqJson.passw)) {
+            res.send("true");
+            console.log("yayyy");
+        } else {
+            console.log("whoo")
+            res.send("false");
+            result.success = false;
+        }
+        result.success = true;
+    }
+    catch (e) {
+        result.success = false;
+    }
+
 })
 
 // manager signup
@@ -100,7 +128,7 @@ app.post("/cooks_signup", async (req, res) => {
     let result = {}
     try {
         const reqJson = req.body;
-        await insertCook(reqJson.fname, reqJson.lname, reqJson.passw, reqJson.em);
+        await insertCook(reqJson.fname, reqJson.lname, reqJson.passw, reqJson.em, reqJson.rest);
         result.success = true;
     }
     catch (e) {
@@ -113,7 +141,6 @@ app.post("/cooks_signup", async (req, res) => {
 })
 
 // salesperson signup
-// cooks signup
 app.post("/saleperson_signup", async (req, res) => {
     let result = {}
     try {
@@ -126,13 +153,19 @@ app.post("/saleperson_signup", async (req, res) => {
     }
     finally {
         res.setHeader("content-type", "application/json")
-        res.send(JSON.stringify(result))
+        res.send(result)
     }
 })
 
 app.listen(8080, () => {
     console.log('App listening on port 8080')
 })
+
+start()
+
+async function start() {
+    await connect();
+}
 
 async function connect() {
     try {
@@ -141,6 +174,25 @@ async function connect() {
     catch (e) {
         console.error(`Failed to connect ${e}`)
     }
+}
+
+
+async function confirmUser(email, password) {
+    try {
+
+        let user_password = await client.query("select password from users where email=$1", [email]);
+        user_password = user_password.rows[0].password;
+
+        if (user_password == password) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    catch (e) {
+        return false;
+    }
+
 }
 
 async function insertCustomer(first_name, last_name, password, email, address) {
@@ -163,9 +215,9 @@ async function insertManager(restaurant_name, first_name, last_name, password, e
     }
 }
 
-async function insertCook(first_name, last_name, password, email) {
+async function insertCook(first_name, last_name, password, email, restaurant) {
     try {
-        await client.query("with ins as (insert into users(user_type,first_name,last_name ,password,email, created_on) values(4, $1,$2, $3, $4, current_timestamp) returning user_id as user_id) insert into cooks (user_id, rating, salary, dropped_food_strike, warnings) values ((select user_id from ins), $5,$6,$7,$8)", [first_name, last_name, password, email, 0, 0, 0, 0]);
+        await client.query("with ins as (insert into users(user_type,first_name,last_name ,password,email, created_on) values(4, $1,$2, $3, $4, current_timestamp) returning user_id as user_id) insert into cooks (user_id, rating, salary, dropped_food_strike, warnings, restaurant_id) values ((select user_id from ins), $5,$6,$7,$8,(select restaurant_id from restaurants where restaurant_name=$9))", [first_name, last_name, password, email, 0, 0, 0, 0, restaurant]);
         return true;
     }
     catch (e) {
@@ -192,3 +244,16 @@ async function insertSalesperson(first_name, last_name, password, email) {
         return false;
     }
 }
+
+
+async function getOrdersForBidding() {
+    try {
+        const results = await client.query("select orders.address, orders.created_on, customers.rating from orders, customers where (orders.user_id = customers.user_id and (orders.delivery_id is null))");
+        return results.rows;
+    }
+    catch (e) {
+        return [];
+    }
+}
+
+
