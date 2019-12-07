@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Customer List</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/cooks_css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/managersutil.css">
+	<link rel="stylesheet" type="text/css" href="../css/customerlist.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-customerlist100" style="background-color:lightgray;";>
+
+		<div class="wrap-customerlist100">
+			<div class="customerlist100-title" style="background-color: #2F4F4F;">
+				<span class="customerlist100-title-1">
+					Customers
+				</span>
+            </div>
+
+			<form class="customerlist100 -form">
+                <div>
+                    <select name="customers" multiple >
+                        <option value ="customer1">James Brown | 4 stars | VIP</option>
+                        <option value ="customer2">Will Langston | 2 stars </option>
+                        <option value ="customer3">Beth Rogers | 3 stars </option>
+                        <option value ="customer4">Rev Shawn | 5 stars | VIP</option>
+                        <option value ="customer5">Riley Adams | 5 stars | VIP</option>
+                        </select>
+
+            </div>
+
+            <div class="container-customerlist100-btn" id="container">
+                <button class="customerlist100-btn" id="button1">
+                    <span>
+                        Send Promo
+                        <i aria-hidden="true"></i>
+                    </span>
+                </button>
+                <button class="customerlist100-btn" id="button2">
+                    <span>
+                        Select VIP
+                        <i aria-hidden="true"></i>
+                    </span>
+                </button>
+            </div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="../jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../js/manager.js"></script>
+
+
+</body>
+</html>
