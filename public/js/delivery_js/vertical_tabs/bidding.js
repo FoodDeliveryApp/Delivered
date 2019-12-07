@@ -82,11 +82,10 @@ function loadTableData(orderData) {
         let winBid = order.winning_bid;
         if (isNaN(winBid)) { winBid = '-'; }
         dataHtml += `<tr>
-            <td>${order.customer.rating}</td>
+            <td>${order.rating}</td>
             <td>${order.location}</td>
-            <td>${order.price}</td>
             <td id = "currentWinningBid">${winBid}</td>
-            <td></td>
+            <td>${order.time_of_placement}</td>
             <td id = "myCurrentBid"></td>
             <td><input type="text" id="myNewBid" style="width:70px">
                 <input type="button" onclick="getBid()" value=&#10003 style="width:40px">
