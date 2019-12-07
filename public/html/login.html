@@ -46,10 +46,28 @@
           <div class="cont_form_login">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>LOGIN</h2>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+            <input type="text" placeholder="Email" id="login_email" />
+            <input type="password" placeholder="Password" id="login_password" />
+            <input type="restaurant" placeholder="restaurant" id="login_restaurant" />
+            <button class="btn_login" id="btn_login" onclick="cambiar_login()">LOGIN</button>
           </div>
+
+          <script>
+            //user sign in
+            const btnSignin = document.getElementById("btn_login")
+            btnSignin.addEventListener("click", async e => {
+              let request = {}
+              request.email = document.getElementById("login_email").value;
+              request.passw = document.getElementById("login_password").value;
+              request.rest = document.getElementById("login_restaurant").value;
+
+              const result = await fetch("http://localhost:8080/signin", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
+
+              console.log(result.url);
+              window.location.href = result.url;
+
+            });
+          </script>
 
           <div class="cont_form_sign_up">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
@@ -84,9 +102,11 @@
       console.log(JSON.stringify(jsonRequest));
 
       const success = await result.json();
-      if (confirm("Account was successfuly created. Please login! ")) {
+      if (confirm("Thank you for the application! You can use system when manager confirms your request")) {
         cambiar_login();
         ocultar_login_sign_up();
+      } else {
+        alert("Customer with email already exists");
       }
     })
 
