@@ -14,7 +14,6 @@
 </head>
 <body>
 
-
 	<div class="container-supplies100" style="background-image: url(../img/bg-02.jpg)";>
 
 		<div class="wrap-supplies100">
@@ -37,17 +36,15 @@
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Valid quality is required">
+				<div class="wrap-input100 validate-input" action="/action_page.php">
 					<span class="label-input100">Quality:</span>
-					<select class="form-control" id="sel1">
-					    <option>--Select rating--</option>
-						<option>1 star</option>
-						<option>2 stars</option>
-						<option>3 stars</option>
-						<option>4 stars</option>
-						<option>5 stars</option>
-					  </select>
-					<span class="focus-input100"></span>
+					<div class="stars" data-rating="5">
+							<span class="star">&nbsp;</span>
+							<span class="star">&nbsp;</span>
+							<span class="star">&nbsp;</span>
+							<span class="star">&nbsp;</span>
+							<span class="star">&nbsp;</span>
+						</div>
 				</div>
 
 				<div class="wrap-input100 validate-input" data-validate = "Comment is required">
@@ -73,9 +70,10 @@
 	<div id="dropDownSelect1"></div>
 
 <!--===============================================================================================-->
-	<script src="../jquery/jquery-3.2.1.min.js"></script>
+	<script src="jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="../js/cooks.js"></script>
+	<script src="../js/CRDJ.js"></script>
 
 </body>
 </html>
