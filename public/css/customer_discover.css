@@ -129,3 +129,27 @@ h2 {
   cursor: pointer;
   position: absolute;
 }
+
+.prev-orders{
+}
+
+.prev-orders table {
+  font-family: arial;
+}
+
+.prev-orders h3 {
+  background: white;
+}
+
+.prev-orders #white-background {
+  background: white;
+  padding: 20px;
+}
+
+.prev-orders td {
+  padding: 0px;
+  margin: 0px;
+  width: 200px;
+  text-align: center;
+
+}
