@@ -5,6 +5,11 @@
   <link href="../css/salesperson_checkout.css" rel="stylesheet">
   <title>Checkout</title>
   <link rel="stylesheet" href="../css/navbar.css">
+  <script>
+    function displayAlert() {
+      alert("Checkout success!");
+    }
+  </script>
 </head>
 
 <div class=container>
@@ -52,7 +57,7 @@
     				<input type="password" maxlength="3" placeholder="123" required>
     			</div>
 
-    			<button type="submit">Confirm</button>
+    			<button type="submit" onclick="displayAlert()">Confirm</button>
     		</form>
     	</section>
     </main>
