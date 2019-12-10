@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Manager Black List</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/cooks_css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../css/managersutil.css">
+	<link rel="stylesheet" type="text/css" href="../css/managerblacklist.css">
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-manager100" style="background-color:lightgray;";>
+
+		<div class="wrap-manager100">
+			<div class="manager100-title" style="background-color: #2F4F4F;">
+				<span class="manager100-title-1">
+					Manager Black List
+				</span>
+			</div>
+
+			<form class="manager100 validate-form">
+                    <div class="wrap-input100 validate-input" data-validate = "Valid first name is required">
+                            <span class="label-input100">First Name:</span>
+                            <input class="input100" type="text" name="fname" placeholder="First Name">
+                            <span class="focus-input100"></span>
+                        </div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Valid last name is required">
+					<span class="label-input100">Last Name:</span>
+					<input class="input100" type="text" name="lname" placeholder="Last Name">
+					<span class="focus-input100"></span>
+                </div>
+                
+                <div class="wrap-input100 validate-input" >
+					<span class="label-input100">Type:</span>
+					<input class="input100" type="text" name="type">
+					<span class="focus-input100"></span>
+                </div>
+
+                <div id="customer">
+                        <input type="checkbox" class="customerrequest100-btn" name="customer1" value=" "> 
+                       
+                        </div>
+                    </div>
+
+				<div class="container-manager100-btn">
+					<button class="manager100-btn">
+						<span>
+							Submit
+							<i aria-hidden="true"></i>
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="../jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../js/manager.js"></script>
+
+
+</body>
+</html>
