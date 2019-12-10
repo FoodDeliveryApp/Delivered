@@ -6,11 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/cooks_css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/cooks_css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/cooksutil.css">
-	<link rel="stylesheet" type="text/css" href="css/cookseditmenu.css">
+	<link rel="stylesheet" type="text/css" href="../css/cooksutil.css">
+	<link rel="stylesheet" type="text/css" href="../css/cookseditmenu.css">
+	<link rel="stylesheet" href="../css/navbar.css">
 <!--===============================================================================================-->
 </head>
 <script> 
@@ -39,12 +40,16 @@ document.getElementById("edit").innerHTML = localStorage.userEdits;
 
 </script>
 <body onload="checkEdits()">
+	<div class="navbar2">
+		<a href="CooksEditMenu.html">Menu</a> 
+		<a href="CooksOrderSupplies.html" >Order Supplies</a>
+		<a href="CooksSuppliesQuality.html">Supplies Quality</a>
+		 </div>
 
-
-	<div class="container-menu100" style="background-image: url(images/bg-02.jpg)";>
+	<div class="container-menu100" style="background-image: url(../img/bg-02.jpg)";>
 
 		<div class="wrap-menu100">
-			<div class="menu100-title" style="background-image: url(images/bg-01.jpg)";>
+			<div class="menu100-title" style="background-image: url(../img/bg-01.jpg)";>
 				<span class="menu100-title-1">
 					Menu
 				</span>
@@ -523,7 +528,7 @@ document.getElementById("edit").innerHTML = localStorage.userEdits;
 
 	<div id="dropDownSelect1"></div>
 
-	<script src="js/cooks.js"></script> 
+	<script src="../js/cooks.js"></script> 
 
 </body>
 </html>
