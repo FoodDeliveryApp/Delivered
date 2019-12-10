@@ -39,7 +39,7 @@ html {
 }
 
 .product-info button {
-  margin: 20px;
+  margin: 15px;
   height: 35px;
   width: 88px;
   border: transparent;
@@ -84,7 +84,6 @@ html {
   border: none; /* Prevent double borders */
   cursor: pointer;
 }
-
 .search-bar button:hover {
   background-color: #dea792;
 }
@@ -94,4 +93,32 @@ html {
   content: "";
   clear: both;
   display: table;
+}
+
+.star {
+  color: goldenrod;
+  font-size: 1.5rem;
+  padding: 0px;
+}
+.star::before {
+  content: '\2606';    /* star outline */
+  cursor: pointer;
+}
+.star.rated::before {
+  /* the style for a selected star */
+  content: '\2605';  /* filled star */
+}
+
+.stars {
+  counter-reset: rateme 0;
+  font-size: 14px;
+  font-weight: 900;
+}
+.star.rated {
+  counter-increment: rateme 1;
+}
+.stars::after {
+  font-family: arial;
+  font-size: 14px;
+  content: counter(rateme) '/5';
 }
