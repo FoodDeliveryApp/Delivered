@@ -47,16 +47,37 @@
           <div class="cont_form_login">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>LOGIN</h2>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+            <input type="text" placeholder="Email" id="email" />
+            <input type="password" placeholder="Password" id="passw" />
+            <input type="text" placeholder="Restaurant" id="rest" />
+            <button class="btn_login" id="btn_login" onclick="cambiar_login()">LOGIN</button>
           </div>
+          <script>
+            //user sign in
+            //first make sure noone else is loggen in (this is wrong, but we don't wont to deal with sessions and cookies to remember who logged in, so for a now our system will only work for one logged in user at a time)
+            fetch("http://localhost:8080/clearSystem", { method: "POST" });
+            const btnSignin = document.getElementById("btn_login")
+            btnSignin.addEventListener("click", async e => {
+              let request = {}
+              request.email = document.getElementById("email").value;
+              request.passw = document.getElementById("passw").value;
+              request.rest = document.getElementById("rest").value;
+              request.type = 0;
+              const result = await fetch("http://localhost:8080/signin", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
+              console.log(result.url);
+              window.location.href = result.url;
+              if (result.url == "salespersonLogin") {
+                window.alert("Incorrect email/password, or you were not confirmed by the manager yet");
+              }
+            });
+
+          </script>
 
           <div class="cont_form_sign_up">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>SIGN UP</h2>
             <input type="text" placeholder="Email" id="sale_email" />
-            <input type="text" placeholder="Username" id="sale_username" />
+            <input type="text" placeholder="Restaurant" id="sale_rest" />
             <input type="text" placeholder="First Name" id="sale_first" />
             <input type="text" placeholder="Last Name" id="sale_last" />
             <input type="password" placeholder="Password" id="sale_password" />
@@ -77,15 +98,19 @@
       jsonRequest.fname = document.getElementById("sale_first").value;
       jsonRequest.lname = document.getElementById("sale_last").value;
       jsonRequest.em = document.getElementById("sale_email").value;
-      jsonRequest.uname = document.getElementById("sale_username").value;
+      jsonRequest.rest = document.getElementById("sale_rest").value;
       jsonRequest.passw = document.getElementById("sale_password").value;
+      jsonRequest.type = 3;
+
       const result = await fetch("http://localhost:8080/saleperson_signup", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(jsonRequest) })
       console.log(JSON.stringify(jsonRequest));
 
       const success = await result.json();
-      if (confirm("Account was successfuly created. Please login! ")) {
+      if (confirm("Thank you for the application! You can use system when manager confirms your request")) {
         cambiar_login();
         ocultar_login_sign_up();
+      } else {
+        alert("Customer with email already exists");
       }
     })
 

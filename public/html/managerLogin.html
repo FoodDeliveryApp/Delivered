@@ -47,10 +47,31 @@
           <div class="cont_form_login">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>LOGIN</h2>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+            <input type="text" placeholder="Email" id="manager_em" />
+            <input type="password" placeholder="Password" id="manager_passw" />
+            <input type="retaurant" placeholder="Restaurant" id="manager_rest" />
+            <button class="btn_login" id="btn_login" onclick="cambiar_login()">LOGIN</button>
           </div>
+
+          <script>
+            //user sign in
+            //first make sure noone else is loggen in (this is wrong, but we don't wont to deal with sessions and cookies to remember who logged in, so for a now our system will only work for one logged in user at a time)
+            fetch("http://localhost:8080/clearSystem", { method: "POST" });
+            const btnSignin = document.getElementById("btn_login")
+            btnSignin.addEventListener("click", async e => {
+              let request = {}
+              request.email = document.getElementById("manager_em").value;
+              request.passw = document.getElementById("manager_passw").value;
+              request.rest = document.getElementById("manager_rest").value;
+              request.type = 1;
+              const result = await fetch("http://localhost:8080/signin", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
+              console.log(result.url);
+              window.location.href = result.url;
+              if (result.url == "/managerLogin") {
+                window.alert("Incorrect email/password");
+              }
+            });
+          </script>
 
           <div class="cont_form_sign_up">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>

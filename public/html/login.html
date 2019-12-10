@@ -48,32 +48,37 @@
             <h2>LOGIN</h2>
             <input type="text" placeholder="Email" id="login_email" />
             <input type="password" placeholder="Password" id="login_password" />
-            <input type="restaurant" placeholder="restaurant" id="login_restaurant" />
+            <input type="text" placeholder="restaurant" id="login_restaurant" />
             <button class="btn_login" id="btn_login" onclick="cambiar_login()">LOGIN</button>
           </div>
 
           <script>
             //user sign in
+            //first make sure noone else is loggen in (this is wrong, but we don't wont to deal with sessions and cookies to remember who logged in, so for a now our system will only work for one logged in user at a time)
+            fetch("http://localhost:8080/clearSystem", { method: "POST" });
+
             const btnSignin = document.getElementById("btn_login")
             btnSignin.addEventListener("click", async e => {
               let request = {}
               request.email = document.getElementById("login_email").value;
               request.passw = document.getElementById("login_password").value;
               request.rest = document.getElementById("login_restaurant").value;
-
+              request.type = 0;
               const result = await fetch("http://localhost:8080/signin", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
-
-              console.log(result.url);
+              console.log(result);
               window.location.href = result.url;
-
+              if (result.url == "http://localhost:8080/login") {
+                window.alert("Incorrect email/password, or you were not confirmed by the manager yet");
+              }
             });
+
           </script>
 
           <div class="cont_form_sign_up">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>SIGN UP</h2>
             <input type="text" placeholder="Email" id="cust_email" />
-            <input type="text" placeholder="Username" id="cust_username" />
+            <input type="text" placeholder="Restaurant" id="cust_rest" />
             <input type="text" placeholder="First Name" id="cust_first" />
             <input type="text" placeholder="Last Name" id="cust_last" />
             <input type="text" placeholder="Address" id="cust_address" />
@@ -95,12 +100,12 @@
       jsonRequest.fname = document.getElementById("cust_first").value;
       jsonRequest.lname = document.getElementById("cust_last").value;
       jsonRequest.em = document.getElementById("cust_email").value;
-      jsonRequest.uname = document.getElementById("cust_username").value;
+      jsonRequest.rest = document.getElementById("cust_rest").value;
       jsonRequest.addr = document.getElementById("cust_address").value;
       jsonRequest.passw = document.getElementById("cust_password").value;
+
       const result = await fetch("http://localhost:8080/signup", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(jsonRequest) })
       console.log(JSON.stringify(jsonRequest));
-
       const success = await result.json();
       if (confirm("Thank you for the application! You can use system when manager confirms your request")) {
         cambiar_login();
@@ -109,7 +114,6 @@
         alert("Customer with email already exists");
       }
     })
-
   </script>
 </body>
 

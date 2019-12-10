@@ -47,16 +47,37 @@
           <div class="cont_form_login">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>LOGIN</h2>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button class="btn_login" onclick="cambiar_login()">LOGIN</button>
+            <input type="text" placeholder="Email" id="cook_em" />
+            <input type="password" placeholder="Password" id="cook_passw" />
+            <input type="text" placeholder="Restaurant" id="cook_rest" />
+            <button class="btn_login" onclick="cambiar_login()" id="btn_login">LOGIN</button>
           </div>
+
+          <script>
+            //user sign in
+            //first make sure noone else is loggen in (this is wrong, but we don't wont to deal with sessions and cookies to remember who logged in, so for a now our system will only work for one logged in user at a time)
+            fetch("http://localhost:8080/clearSystem", { method: "POST" });
+            const btnSignin = document.getElementById("btn_login")
+            btnSignin.addEventListener("click", async e => {
+              let request = {}
+              request.email = document.getElementById("cook_em").value;
+              request.passw = document.getElementById("cook_passw").value;
+              request.rest = document.getElementById("cook_rest").value;
+              request.type = 4;
+              const result = await fetch("http://localhost:8080/cookLogin", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
+              console.log(result.url);
+              window.location.href = result.url;
+              if (result.url == "/cookLogin") {
+                window.alert("Incorrect email/password, or you were not confirmed by the manager yet");
+              }
+            });
+          </script>
 
           <div class="cont_form_sign_up">
             <a href="#" onclick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
             <h2>SIGN UP</h2>
             <input type="text" placeholder="Email" id="cook_email" />
-            <input type="text" placeholder="Username" id="cook_username" />
+            <input type="text" placeholder="Restaurant" id="cook_restaurant" />
             <input type="text" placeholder="First Name" id="cook_first" />
             <input type="text" placeholder="Last Name" id="cook_last" />
             <input type="password" placeholder="Password" id="cook_password" />
@@ -77,14 +98,16 @@
       jsonRequest.fname = document.getElementById("cook_first").value;
       jsonRequest.lname = document.getElementById("cook_last").value;
       jsonRequest.em = document.getElementById("cook_email").value;
-      jsonRequest.uname = document.getElementById("cook_username").value;
+      jsonRequest.uname = document.getElementById("cook_restaurant").value;
       jsonRequest.passw = document.getElementById("cook_password").value;
       const result = await fetch("http://localhost:8080/cooks_signup", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(jsonRequest) })
 
       const success = await result.json();
-      if (confirm("Account was successfuly created. Please login! ")) {
+      if (confirm("Thank you for the application! You can use system when manager confirms your request")) {
         cambiar_login();
         ocultar_login_sign_up();
+      } else {
+        alert("Customer with email already exists");
       }
     })
   </script>
