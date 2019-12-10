@@ -15,14 +15,13 @@ function loadTableData(customers) {
            
             </div>
         </div>`;
-        i = i + 2;
     }
     dataHtml += `</form>`
     tableBody.innerHTML = dataHtml;
 }
 
 
-function buildAcceptedList() {
+function buildAcceptedList(user_type) {
     var customers = document.forms[0];
     var i;
     for (i = 0; i < customers.length; i++) {
@@ -32,10 +31,14 @@ function buildAcceptedList() {
             fetch("http://localhost:8080/updateIsConfermedCust", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
         }
     }
-    window.location.href = 'http://localhost:8080/CustomerRequest';
+    if (user_type == 0) {
+        window.location.href = 'http://localhost:8080/CustomerRequest';
+    } else {
+        window.location.href = 'http://localhost:8080/PersonnelRequest';
+    }
 }
 
-function moveToBlacklist() {
+function moveToBlacklist(user_type) {
     var customers = document.forms[0];
     var i;
     for (i = 0; i < customers.length; i++) {
@@ -45,7 +48,11 @@ function moveToBlacklist() {
             fetch("http://localhost:8080/moveToBlacklist", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(request) });
         }
     }
-    window.location.href = 'http://localhost:8080/CustomerRequest';
+    if (user_type == 0) {
+        window.location.href = 'http://localhost:8080/CustomerRequest';
+    } else {
+        window.location.href = 'http://localhost:8080/PersonnelRequest';
+    }
 }
 
 
