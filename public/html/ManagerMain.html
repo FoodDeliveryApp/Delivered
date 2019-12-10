@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Manager Main</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/cooks_css/bootstrap.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/managermainutil.css">
 	<link rel="stylesheet" type="text/css" href="../css/managermain.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 </head>
+
 <body>
 
-
-	<div class="container-manager100" style="background-color:lightgray;";>
+	<div class="navbar">
+		<a href="CustomerRequest.html">Customers Request</a>
+		<a href="PersonnelRequest.html">Personnel Request</a>
+		<a href="Blacklist.html">Blacklist</a>
+		<!--<a href="CustomerList.html">Customer List</a>
+		<a href="PersonnelList.html">Personnel List</a>           -->
+	</div>
+	<div class="container-manager100" style="background-color:lightgray;" ;>
 
 		<div class="wrap-manager100">
 			<div class="manager100-title" style="background-color: #2F4F4F;">
@@ -25,30 +33,35 @@
 			</div>
 
 			<form class="manager100 validate-form">
-				<div class="wrap-input100 validate-input" data-validate = "Valid personnel is required">
+				<div class="wrap-input100 validate-input" data-validate="Valid personnel is required">
 					<span class="label-input100">Personnel:</span>
 					<select class="form-control" id="sel1">
-					    <option>--Select Personnel--</option>
-						<option> Cook</option>
+						<option>--Select Personnel--</option>
+						<option>Cook</option>
 						<option>Delivery Person</option>
 						<option>Salesperson </option>
-					  </select>
+					</select>
 					<span class="focus-input100"></span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate = "Valid name is required">
-					<span class="label-input100">Name:</span>
-					<input class="input100" type="text" name="name" placeholder="Personnel Name">
+				<div class="wrap-input100 validate-input" data-validate="Valid name is required">
+					<span class="label-input100">First Name:</span>
+					<input class="input100" type="text" name="name" placeholder="First Name" id="first_name">
 					<span class="focus-input100"></span>
-                </div>
-                
-                <div class="wrap-input100 validate-input" data-validate = "Valid amount is required">
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Valid name is required">
+					<span class="label-input100">Last Name:</span>
+					<input class="input100" type="text" name="name" placeholder="Last Name" id="last_name">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate="Valid amount is required">
 					<span class="label-input100">Pay/ Commission:</span>
-					<input class="input100" type="number" name="pay" placeholder="$0.00">
+					<input class="input100" type="number" name="pay" placeholder="$0.00" id="amount">
 					<span class="focus-input100"></span>
-                </div>
-                
-                
+				</div>
+
 
 				<div class="container-manager100-btn">
 					<button class="manager100-btn">
@@ -59,6 +72,21 @@
 					</button>
 				</div>
 			</form>
+			<script>
+				const btnSubmit = document.getElementById("btnSubmit")
+				btnSubmit.addEventListener("click", async e => {
+					const jsonRequest = {}
+					jsonRequest.type = document.getElementById("sel1").value;
+					jsonRequest.fname = document.getElementById("first_name").value;
+					jsonRequest.lname = document.getElementById("last_name").value;
+					jsonRequest.amount = document.getElementById("amount").value;
+
+					const result = await fetch("http://localhost:8080/setPayment", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(jsonRequest) })
+					if (result.success) {
+						window.alert("Success");
+					}
+				})
+			</script>
 		</div>
 	</div>
 
@@ -66,11 +94,12 @@
 
 	<div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="../jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<script src="../js/manager.js"></script>
 
 
 </body>
+
 </html>
