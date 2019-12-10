@@ -109,16 +109,7 @@ html {
   content: '\2605';  /* filled star */
 }
 
-.stars {
-  counter-reset: rateme 0;
-  font-size: 14px;
-  font-weight: 900;
-}
-.star.rated {
-  counter-increment: rateme 1;
-}
-.stars::after {
-  font-family: arial;
-  font-size: 14px;
-  content: counter(rateme) '/5';
+.stars span {
+  padding-right: 10px;
+  padding-bottom: 0px;
 }
