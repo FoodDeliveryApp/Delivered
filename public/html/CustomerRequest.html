@@ -1,132 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Customer Request</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/cooks_css/bootstrap.min.css">
-<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../css/managersutil.css">
 	<link rel="stylesheet" type="text/css" href="../css/customerrequest.css">
-<!--===============================================================================================-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="../css/navbar.css">
+	<style>
+		#button1 {
+			display: inline-block;
+		}
+	</style>
+
 </head>
-<body>
+
+<body id="showCust" class="tabcontent">
+	<div class="navbar">
+		<a href="/ManagerMain">Pays/Commisions</a>
+		<a href="/PersonnelRequest">Personnel Request</a>
+		<a href="/Blacklist">Blacklist</a>
+		<!--<a href="CustomerList.html">Customer List</a>
+		<a href="PersonnelList.html">Personnel List</a>           -->
+	</div>
 
 
-	<div class="container-customerrequest100" style="background-color:lightgray;";>
+	<div class="container-customerrequest100" style="background-color:lightgray;" ;>
 
 		<div class="wrap-customerrequest100">
 			<div class="customerrequest100-title" style="background-color: #2F4F4F;">
 				<span class="customerrequest100-title-1">
 					Customer Request
 				</span>
-            </div>
-
-			<form class="customerrequest100 -form">
-                <div>
-                    <p>Sarah Ford | 1 star</p>
-				<div class="container-customerrequest100-btn" id="container">
-					<button class="customerrequest100-btn" id="button1" onclick="alert('Customer Accepted')">
-						<span>
-							Accept
-							<i aria-hidden="true"></i>
-						</span>
-                    </button>
-                    <button class="customerrequest100-btn" id="button2" onclick="alert('Customer Declined')">
-						<span>
-							Decline
-							<i aria-hidden="true"></i>
-						</span>
-					</button>
-                </div>
-            </div>
-
-            <div>
-                    <p>Will Lopez | 5 stars</p>
-				<div class="container-customerrequest100-btn" id="container">
-					<button class="customerrequest100-btn" id="button1" onclick="alert('Customer Accepted')">
-						<span>
-							Accept
-							<i aria-hidden="true"></i>
-						</span>
-                    </button>
-                    <button class="customerrequest100-btn" id="button2" onclick="alert('Customer Declined')">
-						<span>
-							Decline
-							<i aria-hidden="true"></i>
-						</span>
-					</button>
-                </div>
-            </div>
-
-            <div>
-                    <p>Beth Dawn | 4 stars</p>
-				<div class="container-customerrequest100-btn" id="container">
-					<button class="customerrequest100-btn" id="button1" onclick="alert('Customer Accepted')">
-						<span>
-							Accept
-							<i aria-hidden="true"></i>
-						</span>
-                    </button>
-                    <button class="customerrequest100-btn" id="button2" onclick="alert('Customer Declined')">
-						<span>
-							Decline
-							<i aria-hidden="true"></i>
-						</span>
-					</button>
-                </div>
 			</div>
-			
-			<div>
-				<p>Riley Adams | 5 stars</p>
-			<div class="container-customerrequest100-btn" id="container">
-				<button class="customerrequest100-btn" id="button1" onclick="alert('Customer Accepted')">
-					<span>
-						Accept
-						<i aria-hidden="true"></i>
-					</span>
-				</button>
-				<button class="customerrequest100-btn" id="button2" onclick="alert('Customer Declined')">
-					<span>
-						Decline
-						<i aria-hidden="true"></i>
-					</span>
-				</button>
-			</div>
+
+			<div class="customerrequest100 -form" id="customersDataTable"></div>
+
+			<script>
+				let customersData = [];
+				// show customers waiting for acceptence
+				async function func() {
+					const customersToBeConfirmed = await fetch("http://localhost:8080/getCustomersToBeConfirmed", { method: "GET" });
+					const customers = await customersToBeConfirmed.json();
+
+
+					if (customers.length == 0) {
+						alert("No pending requests at this moment");
+					}
+
+					for (let i = 0; i < customers.length; i++) {
+						let customer = new User(customers[i].first_name,
+							customers[i].last_name, customers[i].email, customers[i].type);
+						customersData.push(customer);
+					}
+					loadTableData(customersData);
+				};
+				func();
+			</script>
+			<button class="customerrequest100-btn" id="button1" onclick="buildAcceptedList(0)"> Accept </button>
+			<button class="customerrequest100-btn" id="button1" onclick="moveToBlacklist(0)"> Blacklist </button>
 		</div>
 
-            <div>
-                    <p>Sharon Scully | 2 stars</p>
-				<div class="container-customerrequest100-btn" id="container">
-					<button class="customerrequest100-btn" id="button1" onclick="alert('Customer Accepted')">
-						<span>
-							Accept
-							<i aria-hidden="true"></i>
-						</span>
-                    </button>
-                    <button class="customerrequest100-btn" id="button2" onclick="alert('Customer Declined')">
-						<span>
-							Decline
-							<i aria-hidden="true"></i>
-						</span>
-					</button>
-                </div>
-            </div>
-			</form>
-		</div>
 	</div>
 
 
 
 	<div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
 	<script src="../jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
 	<script src="../js/manager.js"></script>
-
+	<script src="../js/cust_request.js"></script>
+	<script src="../js/classes.js"></script>
 
 </body>
+
 </html>
