@@ -16,7 +16,7 @@
     }
 
     function displayReceivedAlert() {
-      alert('Received from cook');
+      alert('Received from cook. One item was dropped due to low ratings.');
     }
   </script>
 </head>
@@ -28,30 +28,25 @@
   </div>
 
   <div align='center'>
-    <!-- SEARCH BAR -->
-    <div class='search-bar'>
-      <input type='text' placeholder='Search..' name='search'>
-      <button type='submit' text='enter'>Enter</button>
-    </div>
-
     <!-- PRODUCT CARD -->
     <div class='product-card'>
       <img src='https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'>
 
       <div class='product-info'>
-        <p>Supplier: Pete's Food Supplies</p>
-        <p>Item: Potatoes</p>
-        <p>Quantity: 2</p>
-        <p>Price per Unit: $2</p>
-        <p>Last Ordered: 12-01-2019</p>
+          <p style='color: #d3d3d3'>Supplier: Pete's Food Supplies</p>
+          <p style='color: #d3d3d3'>Item: Potatoes</p>
+          <p style='color: #d3d3d3'>Quantity: 1</p>
+          <p style='color: #d3d3d3'>Price per Unit: $2</p>
+          <p style='color: #d3d3d3'>Last Ordered: 12-01-2019</p>
+
         <div class='stars'>
           <span class='fa fa-star checked'></span>
-          <span class='fa fa-star checked'></span>
+          <span class='fa fa-star'></span>
           <span class='fa fa-star'></span>
           <span class='fa fa-star'></span>
           <span class='fa fa-star'></span>
         </div>
-        <button type='button' name='buy-button' onclick='displayAddedAlert()'>BUY</button>
+        <button type='button' name='buy-button'>BUY</button>
       </div>
     </div>
 
@@ -62,29 +57,8 @@
       <div class='product-info'>
         <p>Supplier: Pete's Food Supplies</p>
         <p>Item: Celery</p>
-        <p>Quantity: 5</p>
+        <p>Quantity: 1</p>
         <p>Price per Unit: $4</p>
-        <p>Last Ordered: 12-01-2019</p>
-        <div class='stars'>
-          <span class='fa fa-star checked'></span>
-          <span class='fa fa-star checked'></span>
-          <span class='fa fa-star'></span>
-          <span class='fa fa-star'></span>
-          <span class='fa fa-star'></span>
-        </div>
-        <button type='button' name='buy-button' onclick='displayAddedAlert()'>BUY</button>
-      </div>
-    </div>
-
-    <!-- PRODUCT CARD -->
-    <div class='product-card'>
-      <img class='card-img-top img-fluid' src='https://i.ebayimg.com/images/g/6Y8AAOSw2QZdVoVP/s-l300.jpg'>
-
-      <div class='product-info'>
-        <p>Supplier: John's Cleaning Supplies</p>
-        <p>Item: Multipurpose Cleaning Spray</p>
-        <p>Quantity: 6</p>
-        <p>Price per Unit: $12</p>
         <p>Last Ordered: 12-01-2019</p>
         <div class='stars'>
           <span class='fa fa-star checked'></span>
@@ -104,20 +78,20 @@
       <div class='product-info'>
         <p>Supplier: Pete's Food Supplies</p>
         <p>Item: Carrots</p>
-        <p>Quantity: 6</p>
+        <p>Quantity: 1</p>
         <p>Price per Unit: $2</p>
         <p>Last Ordered: 12-01-2019</p>
         <div class='stars'>
           <span class='fa fa-star checked'></span>
           <span class='fa fa-star checked'></span>
-          <span class='fa fa-star'></span>
-          <span class='fa fa-star'></span>
+          <span class='fa fa-star checked'></span>
+          <span class='fa fa-star checked'></span>
           <span class='fa fa-star'></span>
         </div>
         <button type='button' name='buy-button' onclick='displayAddedAlert()'>BUY</button>
       </div>
     </div>
-  </div>
+  </div> <!-- END OF ALIGN CENTER -->
 </body>
 
 </html>

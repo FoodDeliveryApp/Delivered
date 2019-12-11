@@ -2,11 +2,17 @@
 <html lang='en'>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Discover</title>
-  <link href='../css/customer_discover.css' rel='stylesheet'>
-  <link href='../css/customer_restaurant_list.css' rel='stylesheet'>
-  <script src="../js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
-  <script src="../js/main.js"></script>
+  <link href='customer_discover.css' rel='stylesheet'>
+  <link href='customer_restaurant_list.css' rel='stylesheet'>
+  <script src="util.js"></script> <!-- util functions included in the CodyHouse framework -->
+  <script src="main.js"></script>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+  <link rel="stylesheet" href="sr.css">
+  <script src="sr.js" defer></script>
 
 
 </head>
@@ -21,6 +27,14 @@
 
   <div align='center'>
     <!-- SEARCH BAR -->
+
+    <div class="container">
+        <form action="https://www.google.com/search" method="get" target="_blank" id="search-form">
+        <input name="q" type="text" placeholder="Search Google..." autocomplete="off" autofocus>
+         <!-- <button type="button"><i class="fas fa-microphone"></i></button> -->
+    </form>
+     <p class="info"></p>
+ </div>
     <div class='search-bar'>
       <input type='text' placeholder='Restaurant name' id="restaurant_search" name='search'>
       <button type='submit' text='enter' onclick='Redirect()' id="btn_restaurant_search">Enter</button>
@@ -95,6 +109,12 @@
       </div>
     </div>
   </div>
+  <iframe
+    allow="microphone;"
+    width="350"
+    height="430"
+    src="https://console.dialogflow.com/api-client/demo/embedded/7e072b24-2f6d-4fc1-93ff-258fa93eabb8">
+</iframe>
 </body>
 <script type="text/javascript">
   // document.getElementById("view_menu_button").onclick = function () {
