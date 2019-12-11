@@ -27,7 +27,8 @@ var userVersion = editElem.innerHTML;
 //save the content to local storage
 localStorage.userEdits = userVersion;
 
-document.getElementById("update").innerHTML="";
+document.getElementById("update").innerHTML="Edits saved!";
+}
 
 function checkEdits() {
 
@@ -36,10 +37,19 @@ if(localStorage.userEdits!=null)
 document.getElementById("edit").innerHTML = localStorage.userEdits;
 }
 
+function alert1(){
+	alert("Food Item was dropped due to low ratings");
 }
 
+function start(){
+	checkEdits()
+	alert1()
+}
+
+
+
 </script>
-<body onload="checkEdits()">
+<body onload="start()">
 	<div class="navbar2">
 		<a href="CooksEditMenu.html">Menu</a> 
 		<a href="CooksOrderSupplies.html" >Order Supplies</a>
