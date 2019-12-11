@@ -9,35 +9,61 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
       <link rel="stylesheet" href="css/status.css">
       <script src="js/Status.js" defer></script>
     </head>
     <body style="margin-top: 20%;">
       <section>
       <center>
-          <h1>Status Bar:</h1>
+          <h1 >Status Bar:</h1>
       </center>
       <div style="margin-left: 10%; margin-right: 10%" class=lass="w3-container">
-          <div class="progress">
+          <div  id="myProgress" class="progress" style="height: 28px;">
               <div class="progress-bar progress-bar-success progress-bar-striped active"  role="progressbar" style="width:25%">
                 Order Placed
               </div>
-              <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" style="width:25%">
+              <div id="myBar2" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" >
                 Cooking
               </div>
-              <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" style="width:25%">
+              <div id="myBar3" class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar">
                 Delivery
               </div>
-              <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style="width:25%">
+              <div id="myBar4" class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar">
                 Deliveried
               </div>
             </div>
             <center>
-                <button><a href="#">Review Food</a></button>
-                <button><a href="#">Review Delivery</a></button>
+<button class= "button_trans" onclick="move()">Cooking</button>
+<button class= "button_trans" onclick="move2()">Picked Up</button>
+<button id = "trans" class= "button_trans" onclick="move3()">Delivered</button>
+
+</center>
+<div id="open"> 
+            <center>
+                <button id="btn1" onload="myFunction()">Review Page</button>
+                <button id="btn2" onload="myFunction()">Delivery Page</button>
             </center>
+          </div>
       </div>
     </section>
+    <script>
+
+      document.getElementById('btn1').style.display ='none'; //first hide the button
+      setTimeout(function(){ //using setTimeout function
+      document.getElementById('btn1').style.display ='inline'; //displaying the button again after 3000ms or 3 seconds
+    }
+    ,5000); 
+  
+    
+    {
+      document.getElementById('btn2').style.display ='none'; //first hide the button
+      setTimeout(function(){ //using setTimeout function
+      document.getElementById('btn2').style.display ='inline'; //displaying the button again after 3000ms or 3 seconds
+    }
+    ,5000); 
+    }
+    </script>
 
 
 
