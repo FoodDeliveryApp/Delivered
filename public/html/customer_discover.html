@@ -7,13 +7,8 @@
   <link href='../css/customer_restaurant_list.css' rel='stylesheet'>
   <script src="../js/util.js"></script> <!-- util functions included in the CodyHouse framework -->
   <script src="../js/main.js"></script>
-  <script src="../js/prev_orders.js"></script>
 
-  <script type = "text/javascript">
-    document.getElementById("view_menu_button").onclick = function () {
-      location.href = "file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html";
-    };
-  </script>
+
 </head>
 
 <header>
@@ -24,24 +19,12 @@
     <h1>Discover</h1>
   </div>
 
-  <h2>Based on previous orders:</h2>
-
-  <div class='prev-orders'>
-    <table align='center'>
-      <tr>
-        <td id='restaurant-pic'>
-          <img src='https://fastly.4sqi.net/img/general/200x200/EO155IEJSJUEQ2IER2F0ZLS4EMC3IE2GVZ4WMVTJYMEW5R0S.jpg'>
-        </td>
-
-        <td id='restaurant-name'>
-          <div id='white-background'>
-            <h3>Fumo</h3>
-            <p>Italian Food</p>
-          </div>
-        </td>
-      </tr>
-    </table>
-
+  <div align='center'>
+    <!-- SEARCH BAR -->
+    <div class='search-bar'>
+      <input type='text' placeholder='Restaurant name' id="restaurant_search" name='search'>
+      <button type='submit' text='enter' onclick='Redirect()' id="btn_restaurant_search">Enter</button>
+    </div>
   </div>
 
   <h2>Trendy restaurants near you:</h2>
@@ -57,12 +40,13 @@
   <div class='food-heaven'>
     <div class='food-heaven-col'>
       <div class='container'>
-        <img src='https://wishtodiscover.com/wp-content/uploads/2018/08/these-sweet-potato-and-mozzarella-burgers-are-a-delicious-1534827608cpl84-250x366.jpg'>
+        <img
+          src='https://wishtodiscover.com/wp-content/uploads/2018/08/these-sweet-potato-and-mozzarella-burgers-are-a-delicious-1534827608cpl84-250x366.jpg'>
         <div class='overlay'>
           <div class='text'>
             <h2>Bareburger</h2>
             <p>Price: $$</p>
-            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="window.location.href = 'file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html'"/>
+            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="goToMenu()" />
           </div>
         </div>
       </div>
@@ -72,7 +56,7 @@
           <div class='text'>
             <h2>Tacos</h2>
             <p>Price: $$$</p>
-            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="window.location.href = 'file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html'"/>
+            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="goToMenu()" />
           </div>
         </div>
       </div>
@@ -82,7 +66,7 @@
           <div class='text'>
             <h2>Dessert</h2>
             <p>Price: $</p>
-            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="window.location.href = 'file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html'"/>
+            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="goToMenu()" />
           </div>
         </div>
       </div>
@@ -95,7 +79,7 @@
           <div class='text'>
             <h2>More Tacos</h2>
             <p>Price: $</p>
-            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="window.location.href = 'file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html'"/>
+            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="goToMenu()" />
           </div>
         </div>
       </div>
@@ -105,12 +89,20 @@
           <div class='text'>
             <h2>Salad</h2>
             <p>Price: $$$$</p>
-            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="window.location.href = 'file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html'"/>
+            <input id="view_menu_button" type="button" value="VIEW MENU" onclick="goToMenu()" />
           </div>
         </div>
       </div>
     </div>
   </div>
 </body>
+<script type="text/javascript">
+  // document.getElementById("view_menu_button").onclick = function () {
+  //   location.href = "file:///Users/maya/SideProjects/Delivered/public/html/MenuWithAddCart.html";
+  // };
+  function goToMenu() {
+    window.location.href = "/MenuWithAddCart";
+  }
+</script>
 
 </html>
